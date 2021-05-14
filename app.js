@@ -17,7 +17,15 @@ mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false); 
 mongoose.set('useCreateIndex', true); 
 mongoose.set('useUnifiedTopology', true); 
-mongoose.connect(url); 
+var MongoClientOptions = 
+{
+	
+    /** username for authentication, equivalent to `options.auth.user`. Maintained for backwards compatibility. */
+    user = 'usouioeghnsihatl7x5h',
+    /** password for authentication, equivalent to `options.auth.password`. Maintained for backwards compatibility. */
+    pass = 'qg886zaQ6yYUj9Z3ipM1'
+}
+mongoose.connect(url,MongoClientOptions);  
 
 app.set("view engine", "ejs"); 
 app.use(bodyParser.json());
