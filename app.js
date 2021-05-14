@@ -11,21 +11,14 @@ var app = express();
 var mosca = require('mosca')
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert'); 
-var url = 'mongodb://usouioeghnsihatl7x5h:qg886zaQ6yYUj9Z3ipM1@bcxknxi8rijrmdf-mongodb.services.clever-cloud.com:27017/bcxknxi8rijrmdf';
+var url = 'mongodb://usouioeghnsihatl7x5h:qg886zaQ6yYUj9Z3ipM1@usouioeghnsihatl7x5h:qg886zaQ6yYUj9Z3ipM1@bcxknxi8rijrmdf-mongodb.services.clever-cloud.com:27017/bcxknxi8rijrmdf';
 var ObjectId = require('mongodb').ObjectID;
 mongoose.set('useNewUrlParser', true); 
 mongoose.set('useFindAndModify', false); 
 mongoose.set('useCreateIndex', true); 
 mongoose.set('useUnifiedTopology', true); 
-var MongoClientOptions = 
-{
-	
-    /** username for authentication, equivalent to `options.auth.user`. Maintained for backwards compatibility. */
-    user = 'usouioeghnsihatl7x5h',
-    /** password for authentication, equivalent to `options.auth.password`. Maintained for backwards compatibility. */
-    pass = 'qg886zaQ6yYUj9Z3ipM1'
-}
-mongoose.connect(url,MongoClientOptions);  
+
+mongoose.connect(url);  
 
 app.set("view engine", "ejs"); 
 app.use(bodyParser.json());
