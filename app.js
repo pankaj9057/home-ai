@@ -297,7 +297,7 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) return next(); 
     res.redirect("/login"); 
 }
-const PORT = 80;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
     console.log("app running on port. 80");
 });
