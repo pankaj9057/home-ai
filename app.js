@@ -11,7 +11,7 @@ var app = express();
 var mosca = require('mosca')
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert'); 
-var url = 'mongodb://localhost:27017/mqtt';
+var url = 'mongodb://usouioeghnsihatl7x5h:qg886zaQ6yYUj9Z3ipM1@bcxknxi8rijrmdf-mongodb.services.clever-cloud.com:27017/bcxknxi8rijrmdf';
 var ObjectId = require('mongodb').ObjectID;
 mongoose.set('useNewUrlParser', true); 
 mongoose.set('useFindAndModify', false); 
