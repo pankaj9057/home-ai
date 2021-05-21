@@ -1,5 +1,464 @@
-<h1>This is home page</h1> 
-  
-<li><a href="/register">Sign up!!</a></li> 
-<li><a href="/login">Login</a></li> 
-<li><a href="/logout">Logout</a></li> 
+<html lang="en">
+<%- include('template/head')-%>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<body>
+
+		<!-- ======= Header ======= -->
+		<header id="header" class="fixed-top">
+			<div class="container d-flex align-items-center">
+
+				<h1 class="logo mr-auto">
+					<a href="/" title="Home AI">
+						<span class="login100-form-title">
+							<i class="zmdi zmdi-home"><span style="display: inline;	font-size: 54px;"
+									class="login100-form-title p-b-26">AI</span></i>
+						</span>
+					</a>
+				</h1>
+				<!-- Uncomment below if you prefer to use an image logo -->
+				<!-- <a href="index.html" class="logo mr-auto"><img src="img/logo.png" alt="" class="img-fluid"></a>-->
+
+				<nav class="nav-menu d-none d-lg-block">
+					<ul>
+						<li class="active"><a href="/">Home</a></li>
+						<li><a href="#contact">Contact</a></li>
+						<%if (Id !=0) { %>
+							<li><a data-toggle="modal" data-target="#exampleModal" href="javascript:void(0)">Profile</a>
+							</li>
+							<li><a href="/logout">Sign Out</a></li>
+							<% } else { %>
+								<li><a href="/login">Sign In</a></li>
+								<% } %>
+					</ul>
+				</nav><!-- .nav-menu -->
+
+				<a href="#about" class="get-started-btn scrollto">Get Started</a>
+
+			</div>
+		</header><!-- End Header -->
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Your Profile/MQTT Details</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form action="/secret" method="GET">
+							<span>Your Client Id is:</span>
+							<b>
+								<%= Id %>
+							</b>
+							<br />
+							<span>Your userTopic is:</span>
+							<b>
+								<%= userTopic %>
+							</b>
+							<br />
+							<span>Your espTopic is:</span>
+							<b>
+								<%= espTopic %>
+							</b>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- ======= Hero Section ======= -->
+		<section id="hero" class="d-flex align-items-center">
+			<div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+				<div class="row justify-content-center">
+					<div class="col-xl-7 col-lg-9 text-center">
+						<h1>A Perfect Home Automation</h1>
+						<h2>Control your home in modern way</h2>
+					</div>
+				</div>
+				<div class="text-center">
+					<a href="#about" class="btn-get-started scrollto">Get Started</a>
+				</div>
+
+				<div class="row icon-boxes">
+					<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+						data-aos-delay="200">
+						<div class="icon-box">
+							<div class="icon"><i class="ri-stack-line"></i></div>
+							<h4 class="title"><a href="">Idea</a></h4>
+							<p class="description">Idea of this project to control home appliance with multiple input
+								like Touch, WiFi, Google Assistant and Bluetooth.</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+						data-aos-delay="300">
+						<div class="icon-box">
+							<div class="icon"><i class="ri-palette-line"></i></div>
+							<h4 class="title"><a href="">Advantage</a></h4>
+							<p class="description">Home appliances can be monitored and maintained from anywhere in the
+								wold and by physically i.e. Touch.</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+						data-aos-delay="400">
+						<div class="icon-box">
+							<div class="icon"><i class="ri-command-line"></i></div>
+							<h4 class="title"><a href="">Setup cost</a></h4>
+							<p class="description">There will be no any cost for setup, as Home AI have all the required
+								services like MQTT and NodeRed services.</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in"
+						data-aos-delay="500">
+						<div class="icon-box">
+							<div class="icon"><i class="ri-fingerprint-line"></i></div>
+							<h4 class="title"><a href="">MQTT and NodeRed</a></h4>
+							<p class="description">For MQTT credentials you have to Sign Up and its totally free. For
+								NodeRed access please contact us so we can give you access.</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section><!-- End Hero -->
+
+		<main id="main">
+
+			<!-- ======= About Section ======= -->
+			<section id="about" class="about">
+				<div class="container" data-aos="fade-up">
+
+					<div class="section-title">
+						<h2>About Home AI</h2>
+						<p>Home AI is a plateform where you can find complete home automation guide
+						</p>
+					</div>
+
+					<div class="row content">
+						<div class="col-lg-12">
+							<p>
+								Basically this project is output of our COVID pendemic ;).<br>
+								Anyway if you are thinking to automate your home and you have intrest in IOT then you
+								are at right place.
+								In this project you will got to know how you can operate 16 appliances by using touch
+								switch, bluetooth, WiFi and google assistant.<br>
+								Idea of this project came to my mind because I am a lazy person and tried to find a
+								device which can work with multiple input but didn't got any suitable product so I have
+								started the project.
+							</p>
+							<h3>Features</h3>
+							<ul>
+								<li><i class="ri-check-double-line"></i> Touch Switch</li>
+								<li><i class="ri-check-double-line"></i> WiFi based operation</li>
+								<li><i class="ri-check-double-line"></i> Google Assistant</li>
+								<li><i class="ri-check-double-line"></i> Bluetooth based operation</li>
+							</ul>
+						</div>
+						<!-- <div class="col-lg-6 pt-4 pt-lg-0">
+							<p>
+								Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+								reprehenderit in voluptate
+								velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+								proident, sunt in
+								culpa qui officia deserunt mollit anim id est laborum.
+							</p>
+							<a href="#" class="btn-learn-more">Learn More</a>
+						</div> -->
+					</div>
+
+				</div>
+			</section><!-- End About Section -->
+
+			<!-- ======= Counts Section ======= -->
+			<section id="counts" class="counts section-bg">
+				<div class="container">
+
+					<div class="row justify-content-end">
+
+						<div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+							<div class="count-box">
+								<span data-toggle="counter-up">16</span>
+								<p>Touch Input</p>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+							<div class="count-box">
+								<span data-toggle="counter-up">16</span>
+								<p>WiFi/Bluetooth Input</p>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+							<div class="count-box">
+								<span data-toggle="counter-up">16</span>
+								<p>Google Assistant</p>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+							<div class="count-box">
+								<span data-toggle="counter-up">16</span>
+								<p>Digital Output</p>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</section><!-- End Counts Section -->
+
+			<!-- ======= About Video Section ======= -->
+			<section id="about-video" class="about-video">
+				<div class="container" data-aos="fade-up">
+
+					<div class="row">
+
+						<div class="col-lg-6 video-box align-self-baseline" data-aos="fade-right" data-aos-delay="100">
+							<img src="img/hero-bg.jpg" class="img-fluid" alt="">
+							<a href="https://www.youtube.com/watch?v=p-JtXU9i1XM" class="venobox play-btn mb-4"
+								data-vbtype="video" data-autoplay="true"></a>
+						</div>
+
+						<div class="col-lg-6 pt-3 pt-lg-0 content" data-aos="fade-left" data-aos-delay="100">
+							<h3>Watch this video for Tutorial and working of project.</h3>
+							<p class="font-italic">
+								In this video we have explained what all component required, circuit diagram and
+								connection, code explanation and configuration of MQTT and NodeRed.
+							</p>
+							<h4>Components Required</h4>
+							<div class="row">
+							<div class="col-lg-6">
+							<ul>
+								<li><i class="bx bx-check-double"></i> ESP-32 development board</li>
+								<li><i class="bx bx-check-double"></i> 5 volts Non-latching Relay</li>
+								<li><i class="bx bx-check-double"></i> Hi-Link 5 volts Power Supply</li>
+								<li><i class="bx bx-check-double"></i> Couple of resistors – 10kΩ, 4.7kΩ & 330 Ω</li>
+								<li><i class="bx bx-check-double"></i> Two pin terminal connectors</li>
+							</ul>
+						</div>
+						<div class="col-lg-6">
+							<ul>
+								<li><i class="bx bx-check-double"></i> Touch Sensor</li>
+								<li><i class="bx bx-check-double"></i> MCP23017 Microcontroller</li>
+								<li><i class="bx bx-check-double"></i> ASM1117 voltage regulator</li>
+								<li><i class="bx bx-check-double"></i> RGB SMD 5500</li>
+							</ul>
+						</div>
+					</div>
+							<p>
+								I will suggest to buy only component which is required for initial prototype, once you are done with the prototype you can continue with final product.
+							</p>
+						</div>
+
+					</div>
+
+				</div>
+			</section><!-- End About Video Section -->
+
+			<!-- ======= Clients Section ======= -->
+			<section id="clients" class="clients section-bg">
+				<div class="container">
+
+					<div class="row">
+
+						<div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+							data-aos="zoom-in">
+							<img src="img/clients/client-1.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+							data-aos="zoom-in">
+							<img src="img/clients/client-2.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+							data-aos="zoom-in">
+							<img src="img/clients/client-3.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+							data-aos="zoom-in">
+							<img src="img/clients/client-4.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+							data-aos="zoom-in">
+							<img src="img/clients/client-5.png" class="img-fluid" alt="">
+						</div>
+
+						<div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center"
+							data-aos="zoom-in">
+							<img src="img/clients/client-6.png" class="img-fluid" alt="">
+						</div>
+
+					</div>
+
+				</div>
+			</section><!-- End Clients Section  #1100110011001100--> 
+			 
+			<!-- ======= Contact Section ======= -->
+			<section id="contact" class="contact">
+				<div class="container" data-aos="fade-up">
+
+					<div class="section-title">
+						<h2>Contact</h2>
+						<p>If you need any help feel free to ask. :)</p>
+					</div>
+
+					<div>
+						<iframe style="border:1; width: 100%; height: 270px;"
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.526659858855!2d77.07189257822674!3d28.583973189305507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1b15d35ac451%3A0x9a81a7241e9ed320!2sDDA%20LIG%20Flats%20Home!5e0!3m2!1sen!2sin!4v1621653063006!5m2!1sen!2sin"
+							frameborder="0" allowfullscreen></iframe>
+
+					</div>
+
+					<div class="row mt-5">
+
+						<div class="col-lg-4">
+							<div class="info">
+								<div class="address">
+									<i class="icofont-google-map"></i>
+									<h4>Location:</h4>
+									<p>C24 Arunodya Apt, Dwarka 7<br>New Delhi, DL 110075</p>
+								</div>
+
+								<div class="email">
+									<i class="icofont-envelope"></i>
+									<h4>Email:</h4>
+									<p>fit.pankaj@gmail.com</p>
+								</div>
+
+								<div class="phone">
+									<i class="icofont-phone"></i>
+									<h4>Call:</h4>
+									<p>+91 7827375736</p>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="col-lg-8 mt-5 mt-lg-0">
+
+							<form action="forms/contact.php" method="post" role="form" class="php-email-form">
+								<div class="form-row">
+									<div class="col-md-6 form-group">
+										<input type="text" name="name" class="form-control" id="name"
+											placeholder="Your Name" data-rule="minlen:4"
+											data-msg="Please enter at least 4 chars" />
+										<div class="validate"></div>
+									</div>
+									<div class="col-md-6 form-group">
+										<input type="email" class="form-control" name="email" id="email"
+											placeholder="Your Email" data-rule="email"
+											data-msg="Please enter a valid email" />
+										<div class="validate"></div>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="text" class="form-control" name="subject" id="subject"
+										placeholder="Subject" data-rule="minlen:4"
+										data-msg="Please enter at least 8 chars of subject" />
+									<div class="validate"></div>
+								</div>
+								<div class="form-group">
+									<textarea class="form-control" name="message" rows="5" data-rule="required"
+										data-msg="Please write something for us" placeholder="Message"></textarea>
+									<div class="validate"></div>
+								</div>
+								<div class="mb-3">
+									<div class="loading">Loading</div>
+									<div class="error-message"></div>
+									<div class="sent-message">Your message has been sent. Thank you!</div>
+								</div>
+								<div class="text-center"><button type="submit">Send Message</button></div>
+							</form>
+
+						</div>
+
+					</div>
+
+				</div>
+			</section><!-- End Contact Section -->
+
+		</main><!-- End #main -->
+
+		<!-- ======= Footer ======= -->
+		<footer id="footer">
+
+			<div class="footer-top">
+				<div class="container">
+					<div class="row">
+
+						<div class="col-lg-3 col-md-6 footer-contact">
+							<h3>Home AI</h3>
+							<p>
+								C24 Arunodya Apt<br>
+								Dwarka 7 New Delhi<br>
+								DL 110075<br><br>
+								<strong>Phone:</strong> +91 7827375736<br>
+								<strong>Email:</strong> fit.pankaj@gmail.com<br>
+							</p>
+						</div>
+
+						<!-- <div class="col-lg-2 col-md-6 footer-links">
+				  <h4>Useful Links</h4>
+				  <ul>
+					<li class="active"><i class="bx bx-chevron-right"></i> <a href="/">Home</a></li>
+					<li><i class="bx bx-chevron-right"></i> <a href="/secret">Profile</a></li>
+					<li><i class="bx bx-chevron-right"></i> <a href="/login">Sign In</a></li>
+					<li><i class="bx bx-chevron-right"></i> <a href="/register">Sign Up</a></li>
+					<li><i class="bx bx-chevron-right"></i> <a href="#contact">Contact</a></li>
+					<li><i class="bx bx-chevron-right"></i> <a href="#about">About us</a></li>
+				  </ul>
+				</div> -->
+
+
+						<div class="col-lg-4 col-md-6 footer-newsletter">
+							<h4>Join Our YouTube channel</h4>
+							<p>Click below link to Subscribe</p>
+							<a type="submit" href="https://www.youtube.com/channel/UCJ_NoTcrrfRFxGYNfPpVexg">Subscribe</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="container d-md-flex py-4">
+
+				<div class="mr-md-auto text-center text-md-left">
+					<div class="copyright">
+						&copy; Copyright <strong><span>Home AI</span></strong>. All Rights Reserved
+					</div>
+
+				</div>
+				<div class="social-links text-center text-md-right pt-3 pt-md-0">
+					<a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+					<a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+					<a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+					<a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+					<a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+				</div>
+			</div>
+		</footer><!-- End Footer -->
+
+		<a href="#" class="back-to-top"><i class="ri-arrow-up-line"></i></a>
+		<div id="preloader"></div>
+		<%- include('template/foot')-%>
+			<!--===============================================================================================-->
+			<script src="js/home/main.js"></script>
+	</body>
+
+</html>

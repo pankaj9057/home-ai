@@ -11,19 +11,21 @@ var app = express();
 var mosca = require('mosca')
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert'); 
-var url = 'mongodb://usouioeghnsihatl7x5h:qg886zaQ6yYUj9Z3ipM1@bcxknxi8rijrmdf-mongodb.services.clever-cloud.com:27017/bcxknxi8rijrmdf';
+var url = 'mongodb://127.0.0.1:27017';
 var ObjectId = require('mongodb').ObjectID;
+const { Console } = require("console");
+const { isNullOrUndefined } = require("util");
 mongoose.set('useNewUrlParser', true); 
 mongoose.set('useFindAndModify', false); 
 mongoose.set('useCreateIndex', true); 
 mongoose.set('useUnifiedTopology', true); 
 
 mongoose.connect(url);  
-
+//app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs"); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-
+app.use(express.static(__dirname + '/public'));
 app.use(require("express-session")({ 
     secret: "I am a secret man", 
     resave: false, 
@@ -217,13 +219,20 @@ function F_ready ()
   
 // Showing home page 
 app.get("/", function (req, res) { 
-    res.render("home"); 
+	if(isNullOrUndefined(req.user))
+	{
+		res.render("home",{ Id: 0,userTopic: "",espTopic:""}); 
+	}
+	else
+	{
+    res.render("home",{ Id: req.user._id,userTopic: req.user.username,espTopic:req.user.username}); 
+	} 
 }); 
   
 // Showing secret page 
 app.get("/secret", isLoggedIn, function (req, res) { 
-    console.log(req.user._id); 
-    res.render("secret",{ Id: req.user._id,userTopic: req.user.username+"_m",espTopic:req.user.username+"_e"}); 
+    console.log(req.user._id); 	
+	res.render("home",{ Id: req.user._id,userTopic: req.user.username,espTopic:req.user.username});
 }); 
   
 // Showing register form 
@@ -270,7 +279,7 @@ app.post("/register", function (req, res) {
         }  
         passport.authenticate("local")( 
             req, res, function () { 
-                res.render("secret",{ Id: req.user._id,userTopic: req.user.username,espTopic:req.user.username}); 
+                res.render("home",{ Id: req.user._id,userTopic: req.user.username,espTopic:req.user.username}); 
         }); 
     }); 
 }); 
@@ -282,7 +291,7 @@ app.get("/login", function (req, res) {
   
 //Handling user login 
 app.post("/login", passport.authenticate("local", { 
-    successRedirect: "/secret", 
+    successRedirect: "/", 
     failureRedirect: "/login"
 }), function (req, res) { 
     console.log(req);
@@ -293,12 +302,11 @@ app.get("/logout", function (req, res) {
     req.logout(); 
     res.redirect("/"); 
 }); 
-  
 function isLoggedIn(req, res, next) { 
     if (req.isAuthenticated()) return next(); 
     res.redirect("/login"); 
 }
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
-    console.log("app running on port. 80");
+    console.log("app running on port. "+PORT+"");
 });
